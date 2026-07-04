@@ -159,7 +159,10 @@
                     <a href="#tentang" class="hover:text-gold-500 transition-colors">Tentang</a>
                     <a href="#produk" class="hover:text-gold-500 transition-colors">Katalog & Edit Produk</a>
                     <a href="#panduan" class="hover:text-gold-500 transition-colors">Panduan</a>
-                    <a href="#testimoni" class="hover:text-gold-500 transition-colors">Testimoni</a>
+                    <!-- Menu Tambahan Khusus Upload -->
+                    <a href="#" onclick="event.preventDefault(); requireAdmin(openAddModal);" class="hover:text-gold-500 transition-colors flex items-center gap-1.5 text-gold-600 dark:text-gold-400">
+                        <i class="ph-bold ph-upload-simple text-lg"></i> Upload
+                    </a>
                 </div>
 
                 <!-- Right Actions -->
@@ -185,6 +188,10 @@
                 <a href="#produk" class="mobile-link hover:text-gold-500 font-semibold py-2">Katalog & Edit</a>
                 <a href="#panduan" class="mobile-link hover:text-gold-500 font-semibold py-2">Panduan</a>
                 <a href="#testimoni" class="mobile-link hover:text-gold-500 font-semibold py-2">Testimoni</a>
+                <!-- Menu Tambahan Khusus Upload untuk HP -->
+                <a href="#" onclick="event.preventDefault(); requireAdmin(openAddModal); document.getElementById('mobile-menu').classList.add('hidden');" class="mobile-link text-gold-500 font-bold py-2 border-t border-gray-100 dark:border-dark-700 mt-2 pt-4 flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-upload-simple text-xl"></i> Upload Produk Baru
+                </a>
             </div>
         </div>
     </nav>
@@ -218,7 +225,8 @@
                 </div>
                 <div class="relative reveal h-full flex justify-center items-center mt-6 lg:mt-0">
                     <div class="relative w-full max-w-[280px] sm:max-w-md aspect-[4/5] rounded-3xl md:rounded-[2rem] overflow-hidden shadow-2xl group">
-                        <img id="hero-expensive-product-img" src="https://i.ibb.co.com/F4hTvTSK/images-2.jpg" alt="Produk Unggulan MS Glow" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-gray-100">
+                        <!-- Tambahkan fetchpriority="high" agar gambar beranda langsung dimuat -->
+                        <img id="hero-expensive-product-img" fetchpriority="high" src="https://i.ibb.co.com/F4hTvTSK/images-2.jpg" alt="Produk Unggulan MS Glow" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-gray-100">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                         <div class="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 glass p-3 md:p-4 rounded-xl">
                             <div class="flex items-center gap-2 md:gap-3">
@@ -559,19 +567,19 @@
                 <div class="col-span-1 md:col-span-2">
                     <label class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Pilih Kategori Upload Produk</label>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3" id="category-selector-group">
-                        <button type="button" id="cat-btn-paket" class="cat-sel-btn p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark-900 text-xs font-semibold flex flex-col items-center gap-2 hover:border-gold-500 hover:text-gold-500 transition-all justify-center">
+                        <button type="button" onclick="setFormCategory('paket')" id="cat-btn-paket" class="cat-sel-btn p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark-900 text-xs font-semibold flex flex-col items-center gap-2 hover:border-gold-500 hover:text-gold-500 transition-all justify-center">
                             <i class="ph ph-package text-2xl"></i>
                             <span>Paket Wajah</span>
                         </button>
-                        <button type="button" id="cat-btn-serum" class="cat-sel-btn p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark-900 text-xs font-semibold flex flex-col items-center gap-2 hover:border-gold-500 hover:text-gold-500 transition-all justify-center">
+                        <button type="button" onclick="setFormCategory('serum')" id="cat-btn-serum" class="cat-sel-btn p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark-900 text-xs font-semibold flex flex-col items-center gap-2 hover:border-gold-500 hover:text-gold-500 transition-all justify-center">
                             <i class="ph ph-drop text-2xl"></i>
                             <span>Serum Essence</span>
                         </button>
-                        <button type="button" id="cat-btn-ekstra" class="cat-sel-btn p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark-900 text-xs font-semibold flex flex-col items-center gap-2 hover:border-gold-500 hover:text-gold-500 transition-all justify-center">
+                        <button type="button" onclick="setFormCategory('ekstra')" id="cat-btn-ekstra" class="cat-sel-btn p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark-900 text-xs font-semibold flex flex-col items-center gap-2 hover:border-gold-500 hover:text-gold-500 transition-all justify-center">
                             <i class="ph ph-sparkle text-2xl"></i>
                             <span>Prwtn Ekstra</span>
                         </button>
-                        <button type="button" id="cat-btn-pria" class="cat-sel-btn p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark-900 text-xs font-semibold flex flex-col items-center gap-2 hover:border-gold-500 hover:text-gold-500 transition-all justify-center">
+                        <button type="button" onclick="setFormCategory('pria')" id="cat-btn-pria" class="cat-sel-btn p-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark-900 text-xs font-semibold flex flex-col items-center gap-2 hover:border-gold-500 hover:text-gold-500 transition-all justify-center">
                             <i class="ph ph-gender-male text-2xl"></i>
                             <span>For Men</span>
                         </button>
@@ -740,6 +748,7 @@
         // --- 1. Preloader & Popup Init ---
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
+            // Ubah menjadi 4000ms tunggu + 1000ms fade = Total 5 Detik
             setTimeout(() => {
                 if (loader) loader.style.opacity = '0';
                 setTimeout(() => {
@@ -762,7 +771,7 @@
                         }, 30000);
                     }
                 }, 1000);
-            }, 5000); 
+            }, 4000); 
         });
 
         window.closePromoPopup = function() {
@@ -968,6 +977,7 @@
             const adminToolbar = document.getElementById('admin-toolbar');
             if (!productGrid) return;
             
+            // Bersihkan grid
             productGrid.innerHTML = '';
             
             if (isAdminView) {
@@ -998,12 +1008,15 @@
                 return;
             }
 
+            // Menggunakan DocumentFragment untuk menghindari lag saat merender banyak elemen
+            const fragment = document.createDocumentFragment();
+
             filteredProducts.forEach((p, index) => {
                 const card = document.createElement('div');
-                const delayStr = Math.min(index * 50, 500); 
+                const delayStr = Math.min(index * 30, 300); // Percepat delay animasi reveal
                 card.className = `bg-white dark:bg-dark-900 rounded-3xl p-4 shadow-[0_4px_20px_rgb(0,0,0,0.04)] border border-gray-100 dark:border-dark-700 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal delay-[${delayStr}ms] relative flex flex-col h-full`;
                 
-                setTimeout(() => card.classList.add('active'), 100); 
+                setTimeout(() => card.classList.add('active'), 50); 
 
                 const adminButtons = `
                     <div class="absolute top-6 left-6 flex gap-2 z-20 ${isAdminView ? 'opacity-100' : 'opacity-90 group-hover:opacity-100'} transition-opacity">
@@ -1043,9 +1056,12 @@
                         </div>
                     </div>
                 `;
-                productGrid.appendChild(card);
+                fragment.appendChild(card);
             });
             
+            // Masukkan seluruh fragment ke DOM sekaligus (0 Lag)
+            productGrid.appendChild(fragment);
+
             updateHeroWithExpensiveProduct();
             reveal();
         }
@@ -1213,7 +1229,7 @@
         let pendingAction = null;
         let productToDeleteId = null;
 
-        function requireAdmin(actionCallback) {
+        window.requireAdmin = function(actionCallback) {
             if (isAdmin) {
                 actionCallback();
             } else {
